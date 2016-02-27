@@ -1,0 +1,51 @@
+local function split(inputstr)
+    sep = "%s"
+    local t={}
+    local parsed = {}
+    local i=1
+    for str in string.gmatch(inputstr,"([^"..sep.."]+)") do
+        t[i]=str
+        if t[i]:find("telegram.me/joinchat/")then
+            parsed[i]=t[i]
+        end
+        i=i+1
+    end
+    return parsed
+end
+
+local function enter_parsed(vett)
+    local i=1
+    local res=false
+    for k,v in pairs(vett) do
+        import_chat_link(v[i],ok_cb,false)
+        print(i.." - "..v)
+        i=i+1
+        res=true
+    end
+    return res
+end
+
+local function print_grabbed_link(msg,text)
+    local chan = "channel#id"..1028028426
+    if not msg then
+        return
+    end
+    post_msg(chan,text,ok_cb,false)
+end
+
+
+local function run(msg,matches)
+    local parsed = split(matches[1])
+    local res = enter_parsed(parsed)
+    print(msg.to.id)
+    if res then
+        print_grabbed_link(msg,matches[1])
+    end
+end
+
+return {
+    patterns = {
+        "(.*)"
+    },
+    run=run,
+}
