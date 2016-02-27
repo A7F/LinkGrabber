@@ -12,14 +12,14 @@ sudo apt-get install libreadline-dev libconfig-dev libssl-dev lua5.2 liblua5.2-d
 then install using:
 ```
 cd $home
-git clone <insertthisrepourl>
+git clone https://github.com/A7F/LinkGrabber.git
 cd grabber-bot
 ./launch.sh install
 ```
 insert your phone number, write the code telegram will send and that's it.
 
 ###Setting up your target channel
-You need the channel id you made for the grabber. To obtain it, start your channel and send a message: if you look on your shell, over your text you'll find what you needed.
+You need the channel id you made for the grabber.
 Then open /plugins/grabber.lua and edit line 35
 ```
 local channel = "channel#id"..<INSERT HERE YOUR ID WITHOUT ANY BRACKETS>
